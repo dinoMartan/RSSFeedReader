@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "AlamofireRSSParser.h"
 
-FOUNDATION_EXPORT double XMLParsingVersionNumber;
-FOUNDATION_EXPORT const unsigned char XMLParsingVersionString[];
+FOUNDATION_EXPORT double AlamofireRSSParserVersionNumber;
+FOUNDATION_EXPORT const unsigned char AlamofireRSSParserVersionString[];
 
