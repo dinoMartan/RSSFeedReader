@@ -16,21 +16,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kC-Kt-fLn">
-                                <rect key="frame" x="184" y="433" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="poy-Kc-9xi">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCQ-t0-BZH">
+                                <rect key="frame" x="344" y="826" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="656-TT-Hz6"/>
+                                    <constraint firstAttribute="height" constant="40" id="ZBo-WN-gwF"/>
+                                </constraints>
+                                <state key="normal" image="plus" catalog="system"/>
                                 <connections>
-                                    <action selector="didTapTestButton:" destination="taj-uK-VsR" eventType="touchUpInside" id="jbj-wj-XXa"/>
+                                    <action selector="didTapAddNewFeedButton:" destination="taj-uK-VsR" eventType="touchUpInside" id="SoT-Cv-oq1"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GUH-u9-cQE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="3kC-Kt-fLn" firstAttribute="centerX" secondItem="7qn-XA-U82" secondAttribute="centerX" id="SnT-wX-jmg"/>
-                            <constraint firstItem="3kC-Kt-fLn" firstAttribute="centerY" secondItem="7qn-XA-U82" secondAttribute="centerY" id="eA2-Nz-Euj"/>
+                            <constraint firstAttribute="bottom" secondItem="WCQ-t0-BZH" secondAttribute="bottom" constant="30" id="8dL-Bw-Wz9"/>
+                            <constraint firstItem="GUH-u9-cQE" firstAttribute="trailing" secondItem="poy-Kc-9xi" secondAttribute="trailing" id="MHQ-3U-Mgx"/>
+                            <constraint firstItem="poy-Kc-9xi" firstAttribute="top" secondItem="GUH-u9-cQE" secondAttribute="top" id="tKW-MJ-iZd"/>
+                            <constraint firstItem="GUH-u9-cQE" firstAttribute="bottom" secondItem="poy-Kc-9xi" secondAttribute="bottom" id="tRp-5N-xch"/>
+                            <constraint firstAttribute="trailing" secondItem="WCQ-t0-BZH" secondAttribute="trailing" constant="30" id="uFe-Cv-Ush"/>
+                            <constraint firstItem="poy-Kc-9xi" firstAttribute="leading" secondItem="GUH-u9-cQE" secondAttribute="leading" id="wa1-NB-hmB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addNewFeedButton" destination="WCQ-t0-BZH" id="5hw-u2-K9B"/>
+                        <outlet property="tableView" destination="poy-Kc-9xi" id="uTd-pg-u40"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Png-eK-lEd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -38,6 +55,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -21,8 +21,17 @@ class APIHandler {
     
     //MARK: - Public methods
     
+    func getOneRSSFeed(url: String, success: @escaping ((RSSFeed?) -> Void), failure: @escaping (() -> Void)) {
+        alamofire.request(url).responseRSS { response in
+            if let feed: RSSFeed = response.value {
+                success(feed)
+            }
+            else { failure() }
+        }
+    }
+    
     /// Fetching [RSSFeed] for the given array of URLs
-    func getRSSFeeds(feedUrls: [String], success: @escaping (([RSSFeed]) -> Void)) {
+    func getMultipleRSSFeeds(feedUrls: [String], success: @escaping (([RSSFeed]) -> Void)) {
         var rssFeeds: [RSSFeed] = []
         let group = DispatchGroup()
         for url in feedUrls {
