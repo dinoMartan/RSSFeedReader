@@ -7,7 +7,7 @@ target 'RSSFeedReader' do
 
   # Pods for RSSFeedReader
   pod 'Alamofire'
-  pod 'AlamofireRSSParser'
   pod 'SDWebImage'
+  pod 'XMLParsing', :git => 'https://github.com/ShawnMoore/XMLParsing.git'
 
 end

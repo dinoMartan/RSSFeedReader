@@ -1,5 +1,5 @@
 //
-//  MyRSSFeed.swift
+//  RSS.swift
 //  RSSFeedReader
 //
 //  Created by Dino Martan on 02/09/2021.
@@ -7,9 +7,8 @@
 
 import Foundation
 
-struct MyRSSFeed {
+struct RSS: Codable {
     
-    let url: String
-    let feed: RSS
+    var channel: Channel
     
 }

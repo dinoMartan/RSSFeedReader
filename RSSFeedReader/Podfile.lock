@@ -1,27 +1,34 @@
 PODS:
   - Alamofire (5.4.3)
-  - AlamofireRSSParser (2.4.0):
-    - Alamofire (~> 5.0)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
+  - XMLParsing (0.0.3)
 
 DEPENDENCIES:
   - Alamofire
-  - AlamofireRSSParser
   - SDWebImage
+  - XMLParsing (from `https://github.com/ShawnMoore/XMLParsing.git`)
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - AlamofireRSSParser
     - SDWebImage
+
+EXTERNAL SOURCES:
+  XMLParsing:
+    :git: https://github.com/ShawnMoore/XMLParsing.git
+
+CHECKOUT OPTIONS:
+  XMLParsing:
+    :commit: 594272e4df40798c53ae1735ee65f3f387291670
+    :git: https://github.com/ShawnMoore/XMLParsing.git
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
-  AlamofireRSSParser: dab86644d4d220b313767c33ef09e7acf11f641a
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  XMLParsing: 085edb6fa22c71d6b53a79299f990a91e7414d19
 
-PODFILE CHECKSUM: b83c4e36fce43df56774370701107e6fa0cca575
+PODFILE CHECKSUM: ba15a8834e9a52c325acd7eec275d72405f195f9
 
 COCOAPODS: 1.10.1

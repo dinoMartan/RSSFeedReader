@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AlamofireRSSParser
 
 class RSSItemsViewController: UIViewController {
     
@@ -17,7 +16,8 @@ class RSSItemsViewController: UIViewController {
     //MARK: - Public properties
     
     static let identifier = "RSSItemsViewController"
-    var items: [RSSItem]?
+    var feedImage: String?
+    var items: [Item]?
     
     //MARK: - Private properties
     
@@ -68,7 +68,7 @@ extension RSSItemsViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let item = items[indexPath.row]
-        cell.configureCell(item: item)
+        cell.configureCell(item: item, feedImage: feedImage)
         return cell
     }
     

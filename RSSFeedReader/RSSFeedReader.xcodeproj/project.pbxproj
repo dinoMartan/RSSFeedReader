@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		314EB4EF26E13FF700E3D453 /* RSS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314EB4EE26E13FF700E3D453 /* RSS.swift */; };
+		314EB4F226E1400600E3D453 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314EB4F126E1400600E3D453 /* Image.swift */; };
+		314EB4F526E1401400E3D453 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314EB4F426E1401400E3D453 /* Channel.swift */; };
+		314EB4F826E1402100E3D453 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314EB4F726E1402100E3D453 /* Item.swift */; };
 		319DAFA226DF7C8A00BBA6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319DAFA126DF7C8A00BBA6CA /* AppDelegate.swift */; };
 		319DAFA426DF7C8A00BBA6CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319DAFA326DF7C8A00BBA6CA /* SceneDelegate.swift */; };
 		319DAFAB26DF7C9300BBA6CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 319DAFAA26DF7C9300BBA6CA /* Assets.xcassets */; };
@@ -30,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		314EB4EE26E13FF700E3D453 /* RSS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSS.swift; sourceTree = "<group>"; };
+		314EB4F126E1400600E3D453 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		314EB4F426E1401400E3D453 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		314EB4F726E1402100E3D453 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		319DAF9E26DF7C8A00BBA6CA /* RSSFeedReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSFeedReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		319DAFA126DF7C8A00BBA6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		319DAFA326DF7C8A00BBA6CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +159,10 @@
 			isa = PBXGroup;
 			children = (
 				319DB00926E0F29200BBA6CA /* MyRSSFeed.swift */,
+				314EB4EE26E13FF700E3D453 /* RSS.swift */,
+				314EB4F126E1400600E3D453 /* Image.swift */,
+				314EB4F426E1401400E3D453 /* Channel.swift */,
+				314EB4F726E1402100E3D453 /* Item.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -352,8 +364,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				319DAFE726DF9BD000BBA6CA /* UserDefaultsConstants.swift in Sources */,
+				314EB4F526E1401400E3D453 /* Channel.swift in Sources */,
+				314EB4F826E1402100E3D453 /* Item.swift in Sources */,
 				319DAFF826DFB2C300BBA6CA /* NewFeedViewControllerDelegate.swift in Sources */,
+				314EB4EF26E13FF700E3D453 /* RSS.swift in Sources */,
 				319DAFE326DF9ACD00BBA6CA /* CurrentUser.swift in Sources */,
+				314EB4F226E1400600E3D453 /* Image.swift in Sources */,
 				319DAFD626DF83A500BBA6CA /* HomeViewController.swift in Sources */,
 				319DAFA226DF7C8A00BBA6CA /* AppDelegate.swift in Sources */,
 				319DAFA426DF7C8A00BBA6CA /* SceneDelegate.swift in Sources */,

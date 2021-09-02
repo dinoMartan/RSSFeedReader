@@ -7,9 +7,9 @@
 
 import Foundation
 import Alamofire
-import AlamofireRSSParser
+import XMLParsing
 
-class APIHandler {
+class APIHandler: NSObject {
 
     //MARK: - Public properties
     
@@ -21,33 +21,52 @@ class APIHandler {
     
     //MARK: - Public methods
     
-    func getOneRSSFeed(url: String, success: @escaping ((MyRSSFeed?) -> Void), failure: @escaping (() -> Void)) {
-        alamofire.request(url).responseRSS { response in
-            if let feed: RSSFeed = response.value {
-                let myRSSFeed = MyRSSFeed(url: url, feed: feed)
-                success(myRSSFeed)
+    func getOneRSSFeed(url: String, success: @escaping ((MyRSSFeed?) -> Void), failure: @escaping ((Error) -> Void)) {
+        alamofire.request(url)
+            .validate()
+            .response { response in
+                switch response.result {
+                case .failure(let error):
+                    failure(error)
+                case .success(let data):
+                    if let data = data,
+                       let rss = try? XMLDecoder().decode(RSS.self, from: data) {
+                        let myFeed = MyRSSFeed(url: url, feed: rss)
+                        success(myFeed)
+                    }
+                }
             }
-            else { failure() }
-        }
     }
+    
     
     /// Fetching [RSSFeed] for the given array of URLs
     func getMultipleRSSFeeds(feedUrls: [String], success: @escaping (([MyRSSFeed]) -> Void)) {
-        var rssFeeds: [MyRSSFeed] = []
+        var myRssFeeds: [MyRSSFeed] = []
         let group = DispatchGroup()
+        
         for url in feedUrls {
             group.enter()
-            alamofire.request(url).responseRSS { response in
-                if let feed: RSSFeed = response.value {
-                    let myRSSFeed = MyRSSFeed(url: url, feed: feed)
-                    rssFeeds.append(myRSSFeed)
+            alamofire.request(url)
+                .validate()
+                .response { response in
+                    switch response.result {
+                    case .failure(_):
+                        group.leave()
+                    case .success(let data):
+                        if let data = data,
+                           let rss = try? XMLDecoder().decode(RSS.self, from: data) {
+                            let myFeed = MyRSSFeed(url: url, feed: rss)
+                            myRssFeeds.append(myFeed)
+                        }
+                        group.leave()
+                    }
                 }
-                group.leave()
-            }
         }
+        
         group.notify(queue: .main) {
-            success(rssFeeds)
+            success(myRssFeeds)
         }
     }
+
 
 }

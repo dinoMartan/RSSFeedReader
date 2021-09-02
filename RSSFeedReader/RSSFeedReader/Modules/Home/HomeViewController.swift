@@ -98,8 +98,10 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let rssItemsStoryboard = UIStoryboard(name: "RSSItems", bundle: nil)
         guard let rssItemsViewController = rssItemsStoryboard.instantiateViewController(identifier: RSSItemsViewController.identifier) as? RSSItemsViewController else { return }
-        let rssItems = feeds[indexPath.row].feed.items
+        let currentFeed = feeds[indexPath.row]
+        let rssItems = currentFeed.feed.channel.items
         rssItemsViewController.items = rssItems
+        rssItemsViewController.feedImage = currentFeed.feed.channel.image?.url
         navigationController?.pushViewController(rssItemsViewController, animated: true)
     }
     
@@ -155,8 +157,8 @@ extension HomeViewController: NewFeedViewControllerDelegate {
             guard let feed = rssFeed else { return }
             feeds.append(feed)
             tableView.reloadData()
-        } failure: {
-            //
+        } failure: { error in
+            // to do - handle error
         }
     }
     

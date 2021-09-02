@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AlamofireRSSParser
 import SDWebImage
 
 class RSSTableViewCell: UITableViewCell {
@@ -21,23 +20,26 @@ class RSSTableViewCell: UITableViewCell {
     
     static let identifier = "RSSTableViewCell"
     
-    //MARK: - Public methods
-    
-    func configureCell(feed: RSSFeed) {
-        if let image = feed.items.first?.imagesFromContent?.first ?? feed.items.first?.imagesFromDescription?.first {
-            feedImageView.sd_setImage(with: URL(string: image), completed: nil)
-        }
-        feedNameLabel.text = feed.title ?? "N/A"
-        feedDescriptionLabel.text = feed.feedDescription ?? "N/A"
+    override func didMoveToSuperview() {
+        feedImageView.layer.cornerRadius = feedImageView.frame.height / 2
     }
     
-    func configureCell(item: RSSItem) {
-        if let image = item.imagesFromContent?.first ??
-            item.imagesFromDescription?.first {
+    //MARK: - Public methods
+    
+    func configureCell(feed: RSS) {
+        if let image = feed.channel.image?.url {
+            feedImageView.sd_setImage(with: URL(string: image), completed: nil)
+        }
+        feedNameLabel.text = feed.channel.title ?? "N/A"
+        feedDescriptionLabel.text = feed.channel.description ?? "N/A"
+    }
+    
+    func configureCell(item: Item, feedImage: String?) {
+        if let image = item.image?.url ?? feedImage {
             feedImageView.sd_setImage(with: URL(string: image), completed: nil)
         }
         feedNameLabel.text = item.title ?? "N/A"
-        feedDescriptionLabel.text = item.itemDescription ?? "N/A"
+        feedDescriptionLabel.text = item.description ?? "N/A"
     }
     
 }
