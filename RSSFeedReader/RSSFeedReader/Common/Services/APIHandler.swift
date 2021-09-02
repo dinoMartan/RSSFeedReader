@@ -21,24 +21,26 @@ class APIHandler {
     
     //MARK: - Public methods
     
-    func getOneRSSFeed(url: String, success: @escaping ((RSSFeed?) -> Void), failure: @escaping (() -> Void)) {
+    func getOneRSSFeed(url: String, success: @escaping ((MyRSSFeed?) -> Void), failure: @escaping (() -> Void)) {
         alamofire.request(url).responseRSS { response in
             if let feed: RSSFeed = response.value {
-                success(feed)
+                let myRSSFeed = MyRSSFeed(url: url, feed: feed)
+                success(myRSSFeed)
             }
             else { failure() }
         }
     }
     
     /// Fetching [RSSFeed] for the given array of URLs
-    func getMultipleRSSFeeds(feedUrls: [String], success: @escaping (([RSSFeed]) -> Void)) {
-        var rssFeeds: [RSSFeed] = []
+    func getMultipleRSSFeeds(feedUrls: [String], success: @escaping (([MyRSSFeed]) -> Void)) {
+        var rssFeeds: [MyRSSFeed] = []
         let group = DispatchGroup()
         for url in feedUrls {
             group.enter()
             alamofire.request(url).responseRSS { response in
                 if let feed: RSSFeed = response.value {
-                    rssFeeds.append(feed)
+                    let myRSSFeed = MyRSSFeed(url: url, feed: feed)
+                    rssFeeds.append(myRSSFeed)
                 }
                 group.leave()
             }

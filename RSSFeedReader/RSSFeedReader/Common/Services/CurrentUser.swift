@@ -31,6 +31,25 @@ class CurrentUser {
     func addNewFeed(url: String) {
         var myFeeds = getMyFeeds()
         myFeeds.append(url)
+        setMyFeeds(myFeeds: myFeeds)
+    }
+    
+    func removeMyFeed(url: String) -> Bool {
+        var myFeeds = getMyFeeds()
+        guard let urlIndex = myFeeds.firstIndex(of: url) else { return false }
+        myFeeds.remove(at: urlIndex)
+        setMyFeeds(myFeeds: myFeeds)
+        return true
+    }
+    
+    func removeAllMyFeeds() {
+        let myFeeds: [String] = []
+        setMyFeeds(myFeeds: myFeeds)
+    }
+    
+    //MARK: - Private methods
+    
+    private func setMyFeeds(myFeeds: [String]) {
         defaults.setValue(myFeeds, forKey: UserDefaultsConstants.myFeeds.rawValue)
     }
     

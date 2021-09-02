@@ -21,13 +21,14 @@ class HomeViewController: UIViewController {
     
     //MARK: - Private properties
     
-    private var feeds: [RSSFeed] = []
+    private var feeds: [MyRSSFeed] = []
     
     //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        //CurrentUser.shared.removeAllMyFeeds()
     }
     
     override func viewWillLayoutSubviews() {
@@ -78,6 +79,8 @@ private extension HomeViewController {
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
+    //MARK: - TableView NumberOfRows and CellForRow
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return feeds.count
     }
@@ -86,17 +89,55 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier) as? HomeTableViewCell else {
             return UITableViewCell()
         }
-        let feed = feeds[indexPath.row]
-        cell.configureCell(feed: feed)
+        let myRSSFeed = feeds[indexPath.row]
+        cell.configureCell(feed: myRSSFeed.feed)
         return cell
     }
+    
+    //MARK: - TableView Selection
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    //MARK: - TableView Height
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+    
+    //MARK: - Row/feed deletion
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let alertController = UIAlertController(title: AlertsContants.deleteFeedQuestion.rawValue, message: AlertsContants.actionCannotBeUndone.rawValue, preferredStyle: .actionSheet)
+            let alertActionOk = UIAlertAction(title: AlertsContants.ok.rawValue, style: .destructive) { [unowned self] _ in
+                removeFeed(at: indexPath)
+            }
+            let alertActionCancel = UIAlertAction(title: AlertsContants.cancel.rawValue, style: .cancel, handler: nil)
+            alertController.addAction(alertActionOk)
+            alertController.addAction(alertActionCancel)
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    //MARK: - Helper methods
+    
+    func removeFeed(at indexPath: IndexPath) {
+        let feedIndex = indexPath.row
+        let myRSSFeed = feeds[feedIndex]
+        let feedUrl = myRSSFeed.url
+        if CurrentUser.shared.removeMyFeed(url: feedUrl) {
+            feeds.remove(at: feedIndex)
+            tableView.reloadData()
+        }
+        else {
+            // to do - handle error
+        }
     }
     
 }
