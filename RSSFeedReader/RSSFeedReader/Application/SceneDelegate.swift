@@ -16,8 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
         let homeStoryboard = UIStoryboard.init(name: "Home", bundle: nil)
-        guard let homeViewController = homeStoryboard.instantiateViewController(identifier: HomeViewController.identifier) as? HomeViewController else { return }
-        window.rootViewController = homeViewController
+        guard let homeNavigationViewController = homeStoryboard.instantiateViewController(identifier: HomeNavigationViewController.identifier) as? HomeNavigationViewController else { return }
+        window.rootViewController = homeNavigationViewController
         window.makeKeyAndVisible()
         self.window = window
     }

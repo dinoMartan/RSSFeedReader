@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AlamofireRSSParser
 
 class HomeViewController: UIViewController {
     
@@ -28,7 +27,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        //CurrentUser.shared.removeAllMyFeeds()
     }
     
     override func viewWillLayoutSubviews() {
@@ -60,7 +58,7 @@ private extension HomeViewController {
     private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: HomeTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: HomeTableViewCell.identifier)
+        tableView.register(UINib(nibName: RSSTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: RSSTableViewCell.identifier)
     }
     
     //MARK: - Data
@@ -86,7 +84,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier) as? HomeTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RSSTableViewCell.identifier) as? RSSTableViewCell else {
             return UITableViewCell()
         }
         let myRSSFeed = feeds[indexPath.row]
@@ -98,6 +96,11 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let rssItemsStoryboard = UIStoryboard(name: "RSSItems", bundle: nil)
+        guard let rssItemsViewController = rssItemsStoryboard.instantiateViewController(identifier: RSSItemsViewController.identifier) as? RSSItemsViewController else { return }
+        let rssItems = feeds[indexPath.row].feed.items
+        rssItemsViewController.items = rssItems
+        navigationController?.pushViewController(rssItemsViewController, animated: true)
     }
     
     //MARK: - TableView Height

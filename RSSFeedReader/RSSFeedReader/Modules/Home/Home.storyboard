@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AFz-wD-NVW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--RSS Feeds-->
         <scene sceneID="bHT-CK-jVJ">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="taj-uK-VsR" customClass="HomeViewController" customModule="RSSFeedReader" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="poy-Kc-9xi">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCQ-t0-BZH">
@@ -47,6 +47,7 @@
                             <constraint firstItem="poy-Kc-9xi" firstAttribute="leading" secondItem="GUH-u9-cQE" secondAttribute="leading" id="wa1-NB-hmB"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="RSS Feeds" id="Vih-Fm-U6U"/>
                     <connections>
                         <outlet property="addNewFeedButton" destination="WCQ-t0-BZH" id="5hw-u2-K9B"/>
                         <outlet property="tableView" destination="poy-Kc-9xi" id="uTd-pg-u40"/>
@@ -54,7 +55,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Png-eK-lEd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-271" y="6"/>
+            <point key="canvasLocation" x="639.13043478260875" y="5.3571428571428568"/>
+        </scene>
+        <!--Home Navigation View Controller-->
+        <scene sceneID="flO-Wj-rKk">
+            <objects>
+                <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="AFz-wD-NVW" customClass="HomeNavigationViewController" customModule="RSSFeedReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LMH-K8-HGz">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="taj-uK-VsR" kind="relationship" relationship="rootViewController" id="mwh-lt-pPc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="enJ-PV-G6q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-271.01449275362319" y="5.3571428571428568"/>
         </scene>
     </scenes>
     <resources>

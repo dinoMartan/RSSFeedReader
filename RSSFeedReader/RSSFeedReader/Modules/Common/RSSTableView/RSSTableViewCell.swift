@@ -9,7 +9,7 @@ import UIKit
 import AlamofireRSSParser
 import SDWebImage
 
-class HomeTableViewCell: UITableViewCell {
+class RSSTableViewCell: UITableViewCell {
     
     //MARK: - IBOutlets
 
@@ -19,7 +19,7 @@ class HomeTableViewCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    static let identifier = "HomeTableViewCell"
+    static let identifier = "RSSTableViewCell"
     
     //MARK: - Public methods
     
@@ -27,8 +27,17 @@ class HomeTableViewCell: UITableViewCell {
         if let image = feed.items.first?.imagesFromContent?.first ?? feed.items.first?.imagesFromDescription?.first {
             feedImageView.sd_setImage(with: URL(string: image), completed: nil)
         }
-        if let name = feed.title { feedNameLabel.text = name }
+        feedNameLabel.text = feed.title ?? "N/A"
         feedDescriptionLabel.text = feed.feedDescription ?? "N/A"
+    }
+    
+    func configureCell(item: RSSItem) {
+        if let image = item.imagesFromContent?.first ??
+            item.imagesFromDescription?.first {
+            feedImageView.sd_setImage(with: URL(string: image), completed: nil)
+        }
+        feedNameLabel.text = item.title ?? "N/A"
+        feedDescriptionLabel.text = item.itemDescription ?? "N/A"
     }
     
 }
