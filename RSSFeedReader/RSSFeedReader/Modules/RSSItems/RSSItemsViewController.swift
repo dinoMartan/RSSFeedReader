@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class RSSItemsViewController: UIViewController {
     
@@ -57,6 +58,8 @@ private extension RSSItemsViewController {
 
 extension RSSItemsViewController: UITableViewDataSource, UITableViewDelegate {
     
+    //MARK: - NumberOfRows and CellForRow
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let items = items { return items.count }
         else { return 0 }
@@ -72,12 +75,22 @@ extension RSSItemsViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    //MARK: - Table Height
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
     
+    //MARK: - Selection
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        guard let items = items,
+              let itemLink = items[indexPath.row].link,
+              let url = URL(string: itemLink)
+        else { return }
+        let safariViewController = SFSafariViewController(url: url)
+        present(safariViewController, animated: true, completion: nil)
     }
     
 }

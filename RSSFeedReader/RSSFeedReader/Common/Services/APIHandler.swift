@@ -38,8 +38,7 @@ class APIHandler: NSObject {
             }
     }
     
-    
-    /// Fetching [RSSFeed] for the given array of URLs
+    /// Fetching [RSS] for the given array of URLs
     func getMultipleRSSFeeds(feedUrls: [String], success: @escaping (([MyRSSFeed]) -> Void)) {
         var myRssFeeds: [MyRSSFeed] = []
         let group = DispatchGroup()
@@ -67,6 +66,5 @@ class APIHandler: NSObject {
             success(myRssFeeds)
         }
     }
-
 
 }
