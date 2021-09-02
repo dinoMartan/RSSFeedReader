@@ -19,6 +19,8 @@
 		319DAFEC26DFAEC900BBA6CA /* NewFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 319DAFEB26DFAEC900BBA6CA /* NewFeed.storyboard */; };
 		319DAFEF26DFAED500BBA6CA /* NewFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319DAFEE26DFAED500BBA6CA /* NewFeedViewController.swift */; };
 		319DAFF826DFB2C300BBA6CA /* NewFeedViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319DAFF726DFB2C300BBA6CA /* NewFeedViewControllerDelegate.swift */; };
+		319DAFFF26DFBB6600BBA6CA /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319DAFFD26DFBB6500BBA6CA /* HomeTableViewCell.swift */; };
+		319DB00026DFBB6600BBA6CA /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 319DAFFE26DFBB6500BBA6CA /* HomeTableViewCell.xib */; };
 		DDDCA5B1E03673684B159BC5 /* Pods_RSSFeedReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33124959A67B1159694EB90F /* Pods_RSSFeedReader.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		319DAFEB26DFAEC900BBA6CA /* NewFeed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewFeed.storyboard; sourceTree = "<group>"; };
 		319DAFEE26DFAED500BBA6CA /* NewFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedViewController.swift; sourceTree = "<group>"; };
 		319DAFF726DFB2C300BBA6CA /* NewFeedViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedViewControllerDelegate.swift; sourceTree = "<group>"; };
+		319DAFFD26DFBB6500BBA6CA /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		319DAFFE26DFBB6500BBA6CA /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
 		33124959A67B1159694EB90F /* Pods_RSSFeedReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RSSFeedReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8C11D09E60821C151B7A7DE /* Pods-RSSFeedReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSSFeedReader.debug.xcconfig"; path = "Target Support Files/Pods-RSSFeedReader/Pods-RSSFeedReader.debug.xcconfig"; sourceTree = "<group>"; };
 		F9853A6C1C24081B48652679 /* Pods-RSSFeedReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSSFeedReader.release.xcconfig"; path = "Target Support Files/Pods-RSSFeedReader/Pods-RSSFeedReader.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 		319DAFD126DF836800BBA6CA /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				319DAFFC26DFBB5000BBA6CA /* TableView */,
 				319DAFD226DF839800BBA6CA /* Home.storyboard */,
 				319DAFD526DF83A500BBA6CA /* HomeViewController.swift */,
 			);
@@ -179,6 +184,15 @@
 				319DAFF726DFB2C300BBA6CA /* NewFeedViewControllerDelegate.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		319DAFFC26DFBB5000BBA6CA /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				319DAFFD26DFBB6500BBA6CA /* HomeTableViewCell.swift */,
+				319DAFFE26DFBB6500BBA6CA /* HomeTableViewCell.xib */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 		5BB755A7B964389C41918027 /* Frameworks */ = {
@@ -251,6 +265,7 @@
 				319DAFD326DF839800BBA6CA /* Home.storyboard in Resources */,
 				319DAFAE26DF7C9300BBA6CA /* LaunchScreen.storyboard in Resources */,
 				319DAFAB26DF7C9300BBA6CA /* Assets.xcassets in Resources */,
+				319DB00026DFBB6600BBA6CA /* HomeTableViewCell.xib in Resources */,
 				319DAFEC26DFAEC900BBA6CA /* NewFeed.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +325,7 @@
 				319DAFD626DF83A500BBA6CA /* HomeViewController.swift in Sources */,
 				319DAFA226DF7C8A00BBA6CA /* AppDelegate.swift in Sources */,
 				319DAFA426DF7C8A00BBA6CA /* SceneDelegate.swift in Sources */,
+				319DAFFF26DFBB6600BBA6CA /* HomeTableViewCell.swift in Sources */,
 				319DAFEF26DFAED500BBA6CA /* NewFeedViewController.swift in Sources */,
 				319DAFCB26DF813200BBA6CA /* APIHandler.swift in Sources */,
 			);

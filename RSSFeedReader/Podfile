@@ -8,5 +8,6 @@ target 'RSSFeedReader' do
   # Pods for RSSFeedReader
   pod 'Alamofire'
   pod 'AlamofireRSSParser'
+  pod 'SDWebImage'
 
 end

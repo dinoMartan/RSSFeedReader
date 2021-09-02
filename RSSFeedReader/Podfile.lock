@@ -2,20 +2,26 @@ PODS:
   - Alamofire (5.4.3)
   - AlamofireRSSParser (2.4.0):
     - Alamofire (~> 5.0)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireRSSParser
+  - SDWebImage
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireRSSParser
+    - SDWebImage
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   AlamofireRSSParser: dab86644d4d220b313767c33ef09e7acf11f641a
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
 
-PODFILE CHECKSUM: 2a78d4aaf64c2077ce0356c8b157fc9f43b14fc8
+PODFILE CHECKSUM: b83c4e36fce43df56774370701107e6fa0cca575
 
 COCOAPODS: 1.10.1
