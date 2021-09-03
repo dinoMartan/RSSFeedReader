@@ -15,6 +15,7 @@ class RSSTableViewCell: UITableViewCell {
     @IBOutlet private weak var feedImageView: UIImageView!
     @IBOutlet private weak var feedNameLabel: UILabel!
     @IBOutlet private weak var feedDescriptionLabel: UILabel!
+    @IBOutlet private weak var nameDescriptionStackView: UIStackView!
     
     //MARK: - Public properties
     
@@ -30,6 +31,8 @@ class RSSTableViewCell: UITableViewCell {
         if let image = feed.channel.image?.url {
             feedImageView.sd_setImage(with: URL(string: image), completed: nil)
         }
+        feedImageView.layer.cornerRadius = feedImageView.frame.height / 2
+        nameDescriptionStackView.distribution = .fill
         feedNameLabel.text = feed.channel.title ?? "N/A"
         feedDescriptionLabel.text = feed.channel.description ?? "N/A"
     }
@@ -40,6 +43,14 @@ class RSSTableViewCell: UITableViewCell {
         }
         feedNameLabel.text = item.title ?? "N/A"
         feedDescriptionLabel.text = item.description ?? "N/A"
+    }
+    
+    func configureCell(result: Result) {
+        feedImageView.layer.cornerRadius = feedImageView.frame.height / 2
+        nameDescriptionStackView.distribution = .fill
+        if let image = result.iconURL { feedImageView.sd_setImage(with: URL(string: image), completed: nil) }
+        feedNameLabel.text = result.title
+        feedDescriptionLabel.text = result.resultDescription ?? "N/A"
     }
     
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class HomeViewController: UIViewController {
     
@@ -49,8 +50,8 @@ private extension HomeViewController {
     //MARK: - View Setup
     
     private func setupView() {
-        fetchMyRssFeeds()
         configureTableView()
+        fetchMyRssFeeds()
     }
     
     //MARK: - TableView Configuration
@@ -64,10 +65,11 @@ private extension HomeViewController {
     //MARK: - Data
     
     private func fetchMyRssFeeds() {
+        tableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .rssGradient1, secondaryColor: .rssGrafient2), animation: .none, transition: .crossDissolve(1))
         let myFeeds = CurrentUser.shared.getMyFeeds()
         APIHandler.shared.getMultipleRSSFeeds(feedUrls: myFeeds) { [unowned self] rssFeeds in
             feeds = rssFeeds
-            tableView.reloadData()
+            tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(1))
         }
     }
     
@@ -75,7 +77,7 @@ private extension HomeViewController {
 
 //MARK: - TableView DataSource and Delegate -
 
-extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+extension HomeViewController: SkeletonTableViewDataSource, UITableViewDelegate {
     
     //MARK: - TableView NumberOfRows and CellForRow
     
@@ -105,10 +107,10 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         navigationController?.pushViewController(rssItemsViewController, animated: true)
     }
     
-    //MARK: - TableView Height
+    //MARK: - SkeletonView
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return RSSTableViewCell.identifier
     }
     
     //MARK: - Row/feed deletion
@@ -173,6 +175,12 @@ extension HomeViewController {
         guard let newFeedViewController = newFeedStoryboard.instantiateViewController(identifier: NewFeedViewController.identifier) as? NewFeedViewController else { return }
         newFeedViewController.delegate = self
         present(newFeedViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func didTapSearchButton(_ sender: Any) {
+        let searchStoryboard = UIStoryboard(name: "RSSSearch", bundle: nil)
+        guard let searchViewController = searchStoryboard.instantiateViewController(identifier: RSSSearchViewController.identifier) as? RSSSearchViewController else { return }
+        navigationController?.pushViewController(searchViewController, animated: true)
     }
     
 }

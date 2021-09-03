@@ -16,9 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="poy-Kc-9xi">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="poy-Kc-9xi">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCQ-t0-BZH">
                                 <rect key="frame" x="344" y="826" width="40" height="40"/>
@@ -42,12 +45,18 @@
                             <constraint firstAttribute="bottom" secondItem="WCQ-t0-BZH" secondAttribute="bottom" constant="30" id="8dL-Bw-Wz9"/>
                             <constraint firstItem="GUH-u9-cQE" firstAttribute="trailing" secondItem="poy-Kc-9xi" secondAttribute="trailing" id="MHQ-3U-Mgx"/>
                             <constraint firstItem="poy-Kc-9xi" firstAttribute="top" secondItem="GUH-u9-cQE" secondAttribute="top" id="tKW-MJ-iZd"/>
-                            <constraint firstItem="GUH-u9-cQE" firstAttribute="bottom" secondItem="poy-Kc-9xi" secondAttribute="bottom" id="tRp-5N-xch"/>
+                            <constraint firstAttribute="bottom" secondItem="poy-Kc-9xi" secondAttribute="bottom" id="tRp-5N-xch"/>
                             <constraint firstAttribute="trailing" secondItem="WCQ-t0-BZH" secondAttribute="trailing" constant="30" id="uFe-Cv-Ush"/>
                             <constraint firstItem="poy-Kc-9xi" firstAttribute="leading" secondItem="GUH-u9-cQE" secondAttribute="leading" id="wa1-NB-hmB"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="RSS Feeds" id="Vih-Fm-U6U"/>
+                    <navigationItem key="navigationItem" title="RSS Feeds" id="Vih-Fm-U6U">
+                        <barButtonItem key="rightBarButtonItem" title="Search" image="magnifyingglass" catalog="system" id="Nqb-hn-bcI">
+                            <connections>
+                                <action selector="didTapSearchButton:" destination="taj-uK-VsR" id="2SC-E8-bMB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addNewFeedButton" destination="WCQ-t0-BZH" id="5hw-u2-K9B"/>
                         <outlet property="tableView" destination="poy-Kc-9xi" id="uTd-pg-u40"/>
@@ -77,6 +86,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

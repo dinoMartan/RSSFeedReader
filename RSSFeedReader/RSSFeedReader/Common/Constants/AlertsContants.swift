@@ -11,6 +11,7 @@ enum AlertsContants: String {
     
     case ok = "OK"
     case cancel = "Cancel"
+    case addFeed = "Add Feed"
     
     case deleteFeedQuestion = "Are you sure that you want to delete this feed?"
     case actionCannotBeUndone = "This action cannot be undone!"
