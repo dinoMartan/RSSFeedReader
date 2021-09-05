@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311A5F5B26E3AE4A009166E9 /* RSSSearchViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A5F5A26E3AE4A009166E9 /* RSSSearchViewControllerDelegate.swift */; };
+		311A5F5E26E4D586009166E9 /* Alerter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A5F5D26E4D586009166E9 /* Alerter.swift */; };
 		314EB4EF26E13FF700E3D453 /* RSS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314EB4EE26E13FF700E3D453 /* RSS.swift */; };
 		314EB4F226E1400600E3D453 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314EB4F126E1400600E3D453 /* Image.swift */; };
 		314EB4F526E1401400E3D453 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314EB4F426E1401400E3D453 /* Channel.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		311A5F5A26E3AE4A009166E9 /* RSSSearchViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSSearchViewControllerDelegate.swift; sourceTree = "<group>"; };
+		311A5F5D26E4D586009166E9 /* Alerter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerter.swift; sourceTree = "<group>"; };
 		314EB4EE26E13FF700E3D453 /* RSS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSS.swift; sourceTree = "<group>"; };
 		314EB4F126E1400600E3D453 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		314EB4F426E1401400E3D453 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 			children = (
 				319DAFCA26DF813200BBA6CA /* APIHandler.swift */,
 				319DAFE226DF9ACD00BBA6CA /* CurrentUser.swift */,
+				311A5F5D26E4D586009166E9 /* Alerter.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				319DAFF726DFB2C300BBA6CA /* NewFeedViewControllerDelegate.swift */,
+				311A5F5A26E3AE4A009166E9 /* RSSSearchViewControllerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -407,9 +413,11 @@
 				319DAFE326DF9ACD00BBA6CA /* CurrentUser.swift in Sources */,
 				314EB4F226E1400600E3D453 /* Image.swift in Sources */,
 				319DAFD626DF83A500BBA6CA /* HomeViewController.swift in Sources */,
+				311A5F5B26E3AE4A009166E9 /* RSSSearchViewControllerDelegate.swift in Sources */,
 				319DAFA226DF7C8A00BBA6CA /* AppDelegate.swift in Sources */,
 				319DAFA426DF7C8A00BBA6CA /* SceneDelegate.swift in Sources */,
 				319DB00A26E0F29200BBA6CA /* MyRSSFeed.swift in Sources */,
+				311A5F5E26E4D586009166E9 /* Alerter.swift in Sources */,
 				319DB00D26E0F3A900BBA6CA /* AlertsContants.swift in Sources */,
 				319DB02326E0F70B00BBA6CA /* RSSItemsViewController.swift in Sources */,
 				319DB02626E0F99200BBA6CA /* HomeNavigationViewController.swift in Sources */,

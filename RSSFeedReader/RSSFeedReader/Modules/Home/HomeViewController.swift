@@ -73,6 +73,20 @@ private extension HomeViewController {
         }
     }
     
+    private func addNewFeed(feedUrl: String) {
+        CurrentUser.shared.addNewFeed(url: feedUrl)
+        APIHandler.shared.getOneRSSFeed(url: feedUrl) { [unowned self] rssFeed in
+            guard let feed = rssFeed else { return }
+            feeds.append(feed)
+            tableView.reloadData()
+        } failure: { error in
+            let alerter = Alerter(title: .defaultTitle, error: error, preferredStyle: .alert)
+            alerter.addAction(title: .ok, style: .default, handler: nil)
+            alerter.addAction(title: .cancel, style: .cancel, handler: nil)
+            alerter.showAlert(on: self, completion: nil)
+        }
+    }
+    
 }
 
 //MARK: - TableView DataSource and Delegate -
@@ -121,14 +135,12 @@ extension HomeViewController: SkeletonTableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alertController = UIAlertController(title: AlertsContants.deleteFeedQuestion.rawValue, message: AlertsContants.actionCannotBeUndone.rawValue, preferredStyle: .actionSheet)
-            let alertActionOk = UIAlertAction(title: AlertsContants.ok.rawValue, style: .destructive) { [unowned self] _ in
+            let alerter = Alerter(title: .deleteFeedQuestion, message: .actionCannotBeUndone, preferredStyle: .actionSheet)
+            alerter.addAction(title: .ok, style: .destructive) { [unowned self] _ in
                 removeFeed(at: indexPath)
             }
-            let alertActionCancel = UIAlertAction(title: AlertsContants.cancel.rawValue, style: .cancel, handler: nil)
-            alertController.addAction(alertActionOk)
-            alertController.addAction(alertActionCancel)
-            present(alertController, animated: true, completion: nil)
+            alerter.addAction(title: .cancel, style: .cancel, handler: nil)
+            alerter.showAlert(on: self, completion: nil)
         }
     }
     
@@ -143,25 +155,31 @@ extension HomeViewController: SkeletonTableViewDataSource, UITableViewDelegate {
             tableView.reloadData()
         }
         else {
-            // to do - handle error
+            let alerter = Alerter(title: .defaultTitle, message: .defaultMessage, preferredStyle: .alert)
+            alerter.addAction(title: .ok, style: .default, handler: nil)
+            alerter.addAction(title: .cancel, style: .cancel, handler: nil)
+            alerter.showAlert(on: self, completion: nil)
         }
     }
     
 }
 
-//MARK: - NewFeedDelegate -
+//MARK: - NewFeedViewControllerDelegate -
 
 extension HomeViewController: NewFeedViewControllerDelegate {
     
     func didAddNewFeed(feedUrl: String) {
-        CurrentUser.shared.addNewFeed(url: feedUrl)
-        APIHandler.shared.getOneRSSFeed(url: feedUrl) { [unowned self] rssFeed in
-            guard let feed = rssFeed else { return }
-            feeds.append(feed)
-            tableView.reloadData()
-        } failure: { error in
-            // to do - handle error
-        }
+        addNewFeed(feedUrl: feedUrl)
+    }
+    
+}
+
+//MARK: - RSSSearchViewControllerDelegate -
+
+extension HomeViewController: RSSSearchViewControllerDelegate {
+    
+    func didAddFeed(feedUrl: String) {
+        addNewFeed(feedUrl: feedUrl)
     }
     
 }
@@ -180,6 +198,7 @@ extension HomeViewController {
     @IBAction func didTapSearchButton(_ sender: Any) {
         let searchStoryboard = UIStoryboard(name: "RSSSearch", bundle: nil)
         guard let searchViewController = searchStoryboard.instantiateViewController(identifier: RSSSearchViewController.identifier) as? RSSSearchViewController else { return }
+        searchViewController.delegate = self
         navigationController?.pushViewController(searchViewController, animated: true)
     }
     

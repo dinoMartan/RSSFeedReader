@@ -13,13 +13,13 @@ class RSSSearchViewController: UIViewController {
     
     //MARK: - IBOutlets
     
-    
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
     
     //MARK: - Public properties
     
     static let identifier = "RSSSearchViewController"
+    weak var delegate: RSSSearchViewControllerDelegate?
     
     //MARK: - Private properties
     
@@ -67,10 +67,13 @@ private extension RSSSearchViewController {
             searchResult = searchRes
             tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(1.0))
         } failure: { error in
-            // to do - handle error
-            print(error.localizedDescription)
+            let alerter = Alerter(title: .defaultTitle, error: error, preferredStyle: .alert)
+            alerter.addAction(title: .ok, style: .default) { [unowned self] _ in
+                tableView.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(1.0))
+            }
+            alerter.addAction(title: .cancel, style: .cancel, handler: nil)
+            alerter.showAlert(on: self, completion: nil)
         }
-
     }
     
 }
@@ -116,9 +119,12 @@ extension RSSSearchViewController: SkeletonTableViewDataSource, UITableViewDeleg
     //MARK: - Swipe actions
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal, title: AlertsContants.addFeed.rawValue) { [unowned self] (_, _, completionHandler) in
+        guard let results = searchResult?.results,
+              let feedUrl = results[indexPath.row].feedID
+        else { return nil }
+        let action = UIContextualAction(style: .normal, title: AlertButtonConstants.addFeed.rawValue) { [unowned self] (_, _, completionHandler) in
             completionHandler(true)
-            addNewFeed()
+            addNewFeed(feedUrl: feedUrl)
         }
         action.backgroundColor = .rssGradient1
         return UISwipeActionsConfiguration(actions: [action])
@@ -126,8 +132,22 @@ extension RSSSearchViewController: SkeletonTableViewDataSource, UITableViewDeleg
     
     //MARK: - Helper methods
     
-    private func addNewFeed() {
-        print("add Feed")
+    private func addNewFeed(feedUrl: String) {
+        let url = feedUrl
+            .replacingOccurrences(of: "feed/", with: "")
+            .replacingOccurrences(of: "http", with: "https")
+        let myFeeds = CurrentUser.shared.getMyFeeds()
+        if !myFeeds.contains(url) {
+            let alerter = Alerter(title: .feedAdded, message: nil, preferredStyle: .actionSheet)
+            alerter.addAction(title: .ok, style: .default, handler: nil)
+            alerter.showAlert(on: self, completion: nil)
+            delegate?.didAddFeed(feedUrl: url)
+        }
+        else {
+            let alerter = Alerter(title: .feedExitsts, message: .feedAlreadyAdded, preferredStyle: .alert)
+            alerter.addAction(title: .ok, style: .default, handler: nil)
+            alerter.showAlert(on: self, completion: nil)
+        }
     }
     
 }
