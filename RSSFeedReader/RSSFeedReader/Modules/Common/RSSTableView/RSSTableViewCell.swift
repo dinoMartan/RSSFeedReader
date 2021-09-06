@@ -31,6 +31,9 @@ class RSSTableViewCell: UITableViewCell {
         if let image = feed.channel.image?.url {
             feedImageView.sd_setImage(with: URL(string: image), completed: nil)
         }
+        else {
+            feedImageView.image = UIImage(named: "rss")
+        }
         feedImageView.layer.cornerRadius = feedImageView.frame.height / 2
         nameDescriptionStackView.distribution = .fill
         feedNameLabel.text = feed.channel.title ?? "N/A"
@@ -38,8 +41,12 @@ class RSSTableViewCell: UITableViewCell {
     }
     
     func configureCell(item: Item, feedImage: String?) {
+        nameDescriptionStackView.distribution = .fill
         if let image = item.image?.url ?? feedImage {
             feedImageView.sd_setImage(with: URL(string: image), completed: nil)
+        }
+        else {
+            feedImageView.image = UIImage(named: "rss")
         }
         feedNameLabel.text = item.title ?? "N/A"
         feedDescriptionLabel.text = item.description ?? "N/A"
@@ -48,7 +55,12 @@ class RSSTableViewCell: UITableViewCell {
     func configureCell(result: Result) {
         feedImageView.layer.cornerRadius = feedImageView.frame.height / 2
         nameDescriptionStackView.distribution = .fill
-        if let image = result.iconURL { feedImageView.sd_setImage(with: URL(string: image), completed: nil) }
+        if let image = result.iconURL {
+            feedImageView.sd_setImage(with: URL(string: image), completed: nil)
+        }
+        else {
+            feedImageView.image = UIImage(named: "rss")
+        }
         feedNameLabel.text = result.title
         feedDescriptionLabel.text = result.resultDescription ?? "N/A"
     }

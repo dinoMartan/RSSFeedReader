@@ -98,8 +98,16 @@ extension NewFeedViewController {
         guard let url = feedUrlTextField.text,
               url != ""
         else { return }
-        delegate?.didAddNewFeed(feedUrl: url)
-        dismiss(animated: true, completion: nil)
+        let myFeeds = CurrentUser.shared.getMyFeeds()
+        if myFeeds.contains(url) {
+            let alerter = Alerter(title: .feedExitsts, message: .feedAlreadyAdded, preferredStyle: .alert)
+            alerter.addAction(title: .ok, style: .default, handler: nil)
+            alerter.showAlert(on: self, completion: nil)
+        }
+        else {
+            delegate?.didAddNewFeed(feedUrl: url)
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func didTapCancelButton(_ sender: Any) {

@@ -43,8 +43,7 @@ class CurrentUser {
     }
     
     func removeAllMyFeeds() {
-        let myFeeds: [String] = []
-        setMyFeeds(myFeeds: myFeeds)
+        defaults.removeObject(forKey: UserDefaultsConstants.myFeeds.rawValue)
     }
     
     //MARK: - Private methods

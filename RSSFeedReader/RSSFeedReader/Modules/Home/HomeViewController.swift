@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var addNewFeedButton: UIButton!
+    @IBOutlet private weak var noFeedsView: UIView!
     
     //MARK: - Public properties
     
@@ -47,6 +48,11 @@ private extension HomeViewController {
         addNewFeedButton.layer.cornerRadius = addNewFeedButton.frame.height / 2
     }
     
+    private func setNoFeedsView() {
+        if feeds.isEmpty { noFeedsView.isHidden = false }
+        else { noFeedsView.isHidden = true }
+    }
+    
     //MARK: - View Setup
     
     private func setupView() {
@@ -70,6 +76,7 @@ private extension HomeViewController {
         APIHandler.shared.getMultipleRSSFeeds(feedUrls: myFeeds) { [unowned self] rssFeeds in
             feeds = rssFeeds
             tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(1))
+            setNoFeedsView()
         }
     }
     
@@ -79,11 +86,13 @@ private extension HomeViewController {
             guard let feed = rssFeed else { return }
             feeds.append(feed)
             tableView.reloadData()
-        } failure: { error in
+            setNoFeedsView()
+        } failure: { [unowned self] error in
             let alerter = Alerter(title: .defaultTitle, error: error, preferredStyle: .alert)
             alerter.addAction(title: .ok, style: .default, handler: nil)
             alerter.addAction(title: .cancel, style: .cancel, handler: nil)
             alerter.showAlert(on: self, completion: nil)
+            setNoFeedsView()
         }
     }
     
@@ -153,6 +162,7 @@ extension HomeViewController: SkeletonTableViewDataSource, UITableViewDelegate {
         if CurrentUser.shared.removeMyFeed(url: feedUrl) {
             feeds.remove(at: feedIndex)
             tableView.reloadData()
+            setNoFeedsView()
         }
         else {
             let alerter = Alerter(title: .defaultTitle, message: .defaultMessage, preferredStyle: .alert)
