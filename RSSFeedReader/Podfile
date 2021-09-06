@@ -6,5 +6,9 @@ target 'RSSFeedReader' do
   use_frameworks!
 
   # Pods for RSSFeedReader
+  pod 'Alamofire'
+  pod 'SDWebImage'
+  pod 'XMLParsing', :git => 'https://github.com/ShawnMoore/XMLParsing.git'
+  pod 'SkeletonView'
 
 end
